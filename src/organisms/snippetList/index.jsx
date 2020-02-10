@@ -30,12 +30,6 @@ const SnippetList = ({
       <PageTitle isLight>
         { listingName }
       </PageTitle>
-      <PageSubtitle isLight className='list-top-subtitle'>
-        { listingSublinks.length
-          ? _l`snippet_list.with_sublinks.${listingType}`
-          : _l`snippet_list.${listingType}`
-        }
-      </PageSubtitle>
       { snippetList.map(snippet => (
         <PreviewCard
           key={ `snippet_${snippet.url}` }

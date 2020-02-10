@@ -26,9 +26,6 @@ const SearchResults = ({
       </PageSubtitle>
     ) : (
       <>
-        <PageSubtitle className='search-compact-sub'>
-          { _l('Click on a snippet card to view the snippet.') }
-        </PageSubtitle>
         <PageSubtitle isLight className='search-results-title'>
           { _l('Search results') }
         </PageSubtitle>
@@ -71,9 +68,6 @@ const SearchResults = ({
       />
     ) : (
       <>
-        <PageSubtitle className='search-compact-sub'>
-          { _l('Click on a snippet card to view the snippet.') }
-        </PageSubtitle>
         <PageSubtitle isLight className='search-results-title'>
           { _l('Search results') }
         </PageSubtitle>
