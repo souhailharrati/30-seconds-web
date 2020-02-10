@@ -1,25 +1,38 @@
 // Return to previous page link
 a.link-back {
+  position: absolute;
+  top: 0;
+  left: 0;
   transition: 0.3s ease all;
   font-size: 1.125rem;
-  line-height: 1.35;
+  line-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
   display: block;
-  margin: 0.8125rem 1.25rem 1.5rem;
-  padding-left: 24px;
-  position: relative;
+  margin: 0;
+  padding-left: 40px;
+  z-index: 1010;
+  background: var(--nav-bar-back-color);
+  border-bottom: 1px solid var(--nav-bar-border-color); 
+  width: 100vw;
+
   &, &:link, &:visited {
     color: var(--fore-color-dark);
   }
 
   &:before {
     position: absolute;
-    left: 0;
+    left: 16px;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 48px;
   }
 
-  @media screen and (max-width: calc(#{$layout-medium-breakpoint} - 1px)) {
-    margin-left: 0.875rem;
-    margin-right: 0.875rem;
+  @media screen and (min-width: $layout-large-nav-breakpoint) {
+    width: 768px;
+    left: calc((100% - 768px) / 2);
+
+    &:before {
+      left: calc((100% - 768px) / 2 + 16px);
+    }
   }
 }
