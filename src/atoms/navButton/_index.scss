@@ -19,7 +19,7 @@ $nav-button-active-fore-color-dark: #CDD4EF;
 .nav-btn {
   position: relative;
   display: inline-block;
-  width: 25%;
+  width: 33.333%;
   height: 56px;
   margin: 0;
   background: transparent;
@@ -30,17 +30,7 @@ $nav-button-active-fore-color-dark: #CDD4EF;
   line-height: 56px;
   cursor: pointer;
   transition: 0.3s ease all;
-  @media screen and (min-width: $layout-medium-breakpoint) and (orientation: landscape) {
-    max-height: 12.5vh;
-    width: 100%;
-    margin-top: 1vh;
-    margin-bottom: 4vh;
-    padding-top: 44px;
-    line-height: 1.5;
-  }
-  @media screen and (min-width: $layout-large-breakpoint) and (orientation: landscape) {
-    margin-bottom: 1vh;
-  }
+
   &, &:link, &:visited {
     color: var(--nav-button-fore-color);
 
@@ -59,9 +49,31 @@ $nav-button-active-fore-color-dark: #CDD4EF;
   &:before {
     width: 100%;
     text-align: center;
-    top: 6px;
+    top: 16px;
     left: 0;
     position: absolute;
-    font-size: 20px;
+    font-size: 24px;
+  }
+
+  &.with-text {
+    &:before {
+      font-size: 20px;
+      top: 6px;
+    }
+  }
+
+  @media screen and (min-width: $layout-large-nav-breakpoint) {
+    width: 2.5rem;
+    left: 1rem;
+
+    &:last-of-type {
+      position: absolute;
+      left: auto;
+      right: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 4rem;
   }
 }

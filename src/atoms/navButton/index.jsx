@@ -8,6 +8,8 @@ const _l = _('en');
 
 export const NAV_ICONS = [
   'search',
+  'home',
+  'settings',
   'list',
   'github',
   'sun',
@@ -20,22 +22,26 @@ export const NAV_ICONS = [
  */
 const NavButton = ({
   className,
+  withText = false,
   icon,
   link,
   ...rest
 }) => (
   <Anchor
-    className={ trimWhiteSpace`nav-btn icon ${`icon-${icon}`} ${className}` }
+    className={ trimWhiteSpace`nav-btn icon ${`icon-${icon}`} ${withText ? 'with-text' : ''} ${className}` }
     link={ link }
+    title={ withText ? '' : _l(`nav.${icon}`) }
     { ...rest }
   >
-    { _l(`nav.${icon}`) }
+    { withText ? _l(`nav.${icon}`) : null }
   </Anchor>
 );
 
 NavButton.propTypes = {
   /** Additional classname(s) for the link button */
   className: PropTypes.string,
+  /** Should the button render text or just the icon */
+  withText: PropTypes.string,
   /** Icon name for the navigation button */
   icon: PropTypes.oneOf(NAV_ICONS).isRequired,
   /** Anchor link data */

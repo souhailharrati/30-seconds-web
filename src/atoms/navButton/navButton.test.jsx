@@ -26,12 +26,19 @@ describe('<NavButton />', () => {
     expect(wrapper).toContainMatchingElement(`a.nav-btn.icon-${icon}`);
   });
 
-  it('should render with the correct icon string literal', () => {
-    expect(wrapper.text()).toEqual(_l(`nav.${icon}`));
-  });
-
   it('should link to the passed URL', () => {
     expect(button.prop('href')).toBe(link.url);
+  });
+
+  describe('with text', () => {
+    beforeEach(() => {
+      wrapper = mount(<NavButton link={ link } icon={ icon } withText />);
+      button = wrapper.find('a.nav-btn');
+    });
+
+    it('should render with the correct icon string literal', () => {
+      expect(wrapper.text()).toEqual(_l(`nav.${icon}`));
+    });
   });
 });
 
