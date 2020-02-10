@@ -6,3 +6,7 @@
 .listing-anchors + .list-top-subtitle {
   margin-top: -0.0625rem;
 }
+
+.listing-anchors.compact + .page-title {
+  margin-top: 1rem;
+}
