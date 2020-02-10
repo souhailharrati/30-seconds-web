@@ -66,6 +66,7 @@ const literals = {
   },
   // Site navigation
   'nav.search': 'Search',
+  'nav.home': 'Home',
   'nav.list': 'List',
   'nav.github': 'GitHub',
   'nav.moon': 'Dark mode',
