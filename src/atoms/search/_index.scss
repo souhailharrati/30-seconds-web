@@ -39,10 +39,10 @@ $search-placeholder-color-dark: #999EBD;
 
 [type="search"].search-box {
   position: absolute;
-  left: 0;
+  left: 4.25rem;
   top: 0;
   transition: 0.3s ease all;
-  width: 100vw;
+  width: calc(100vw - 4.25rem);
   background: var(--search-back-color);
   padding: 0.375px 1rem 0 2.5rem;
   outline: none;

@@ -27,8 +27,6 @@ const NotFoundPage = ({
         logoSrc={ logoSrc }
         isSearch={ false }
         isListing={ false }
-        withIcon={ true }
-        withTitle={ true }
       >
         <PageTitle>{ _l('404') }</PageTitle>
         <PageBackdrop

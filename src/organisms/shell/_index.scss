@@ -5,21 +5,31 @@
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-template-areas: "content" "menu";
+  grid-template-areas: "." "content" "menu";
   grid-template-columns: 100%;
-  grid-template-rows: calc(100vh - 56px) 56px;
+  grid-template-rows: 48px calc(100vh - 56px - 48px) 56px;
 
-  // Medium screen size (mobile landscape, tablet)
-  @media screen and (min-width: $layout-medium-breakpoint) and(orientation: landscape) {
-    grid-template-areas: "menu content";
-    grid-template-columns: 56px calc(100vw - 56px);
-    grid-template-rows: 100%;
+  @media screen and (min-width: $layout-large-nav-breakpoint) {
+    grid-template-areas: "menu" "content";
+    grid-template-rows: 48px calc(100vh - 48px);
   }
 }
 
 // Menu container
 .nav-bar {
   grid-area: menu;
+}
+
+// Top menu container
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 48px;
+  border-bottom: 1px solid var(--nav-bar-border-color); 
+  background: var(--nav-bar-back-color);
+  box-sizing: border-box;
 }
 
 // Content container
@@ -46,47 +56,19 @@
     border-radius: 0.1875rem;
   }
 
-  @media screen and (min-width: calc(768px)) and (orientation: portrait) {
+  @media screen and (min-width: 768px) {
     padding-left: calc((100% - 768px) / 2);
     padding-right: calc((100% - 768px) / 2);
-  }
-
-  @media screen and (min-width: calc(768px + 56px)) and (orientation: landscape) {
-    padding-left: calc((100% - 768px - 56px) / 2);
-    padding-right: calc((100% - 768px - 56px) / 2);
-  }
-}
-
-// Website title
-h1.website-title {
-  transition: 0.3s ease all;
-  font-size: 1rem;
-  line-height: 1.375;
-  > a {
-    &, &:link, &:visited {
-      color: var(--fore-color-lighter);
-
-      &:hover, &:focus {
-        text-decoration: none;
-      }
-    }
-  }
-  position: relative;
-  top: 6px;
-  margin: 1.5rem 1.25rem 0.125rem;
-
-  @media screen and (max-width: calc(#{$layout-medium-breakpoint} - 1px)) {
-    margin-left: 1rem;
-    margin-right: 1rem;
   }
 }
 
 // Website logo
 img.website-logo {
   transition: 0.3s ease all;
-  position: absolute;
+  position: fixed;
   top: 2px;
-  right: 0px;
-  width: 48px;
-  height: 48px;
+  left: 14px;
+  width: 44px;
+  height: 44px;
+  z-index: 1011;
 }

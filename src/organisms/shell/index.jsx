@@ -11,6 +11,7 @@ const _l = _('en');
 import config from '../../../config';
 import { Anchor } from 'atoms/anchor';
 import env from '../../../.build/env';
+import { trimWhiteSpace } from 'functions/utils';
 
 // eslint-disable-next-line complexity
 const Shell = ({
@@ -56,7 +57,7 @@ const Shell = ({
       }
       <NavBar buttons={ [
         {
-          icon: 'list',
+          icon: 'home',
           className: isListing ? 'active' : '',
           link: {
             internal: true,
@@ -73,16 +74,16 @@ const Shell = ({
             title: 'Search',
           },
         },
-        {
-          icon: 'github',
-          link: {
-            internal: false,
-            url: externalUrl,
-            title: 'GitHub',
-            rel: 'noopener',
-            target: '_blank',
-          },
-        },
+        // {
+        //   icon: 'github',
+        //   link: {
+        //     internal: false,
+        //     url: externalUrl,
+        //     title: 'GitHub',
+        //     rel: 'noopener',
+        //     target: '_blank',
+        //   },
+        // },
         {
           icon: isDarkMode ? 'sun' : 'moon',
           link: {
@@ -97,26 +98,20 @@ const Shell = ({
           },
         },
       ] }/>
+      <div className='top-bar' />
       <div className='content'>
-        { withTitle ? (
-          <h1 className='website-title'>
-            <Anchor
-              link={ {
-                internal: true,
-                url: '/',
-              } }
-            >
-              { _l('site.title') }
-              { withIcon ? (
-                <img
-                  src={ logoSrc }
-                  alt={ _l('Logo') }
-                  className='website-logo'
-                />
-              ) : ( '' ) }
-            </Anchor>
-          </h1>
-        ) : ( '' ) }
+        <Anchor
+          link={ {
+            internal: true,
+            url: '/',
+          } }
+        >
+          <img
+            src={ logoSrc }
+            alt={ _l('Logo') }
+            className='website-logo'
+          />
+        </Anchor>
         { children }
         <Footer />
       </div>

@@ -22,14 +22,14 @@ const SnippetList = ({
 }) => {
   return snippetList.length ? (
     <>
+      <PageTitle isLight>
+        { listingName }
+      </PageTitle>
       {
         listingSublinks.length
           ? <ListingAnchors isCompact={ listingType !== 'main' } items={ listingSublinks } />
           : null
       }
-      <PageTitle isLight>
-        { listingName }
-      </PageTitle>
       { snippetList.map(snippet => (
         <PreviewCard
           key={ `snippet_${snippet.url}` }

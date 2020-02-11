@@ -54,24 +54,19 @@ describe('<Shell />', () => {
     });
   });
 
-  it('should create a NavBar with 4 buttons', () => {
-    expect(navBar.prop('buttons').length).toBe(4);
+  it('should create a NavBar with 3 buttons', () => {
+    expect(navBar.prop('buttons').length).toBe(3);
   });
 
   describe('should pass a button to the NavBar', () => {
+    it('for the home page', () => {
+      expectArrayToContainMatchingObject(navBar.prop('buttons'), {
+        icon: 'home',
+      });
+    });
     it('for the search page', () => {
       expectArrayToContainMatchingObject(navBar.prop('buttons'), {
         icon: 'search',
-      });
-    });
-    it('for the list page', () => {
-      expectArrayToContainMatchingObject(navBar.prop('buttons'), {
-        icon: 'list',
-      });
-    });
-    it('for the github link', () => {
-      expectArrayToContainMatchingObject(navBar.prop('buttons'), {
-        icon: 'github',
       });
     });
     it('for the mode toggle', () => {

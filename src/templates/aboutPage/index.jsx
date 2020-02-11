@@ -33,8 +33,6 @@ const AboutPage = ({
         logoSrc={ logoSrc }
         isSearch={ false }
         isListing={ false }
-        withIcon
-        withTitle
       >
         <PageTitle>
           { _l('About') }

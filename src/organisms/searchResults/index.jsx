@@ -4,6 +4,7 @@ import PageBackdrop from 'molecules/pageBackdrop';
 import PropTypes from 'prop-types';
 import { Anchor } from 'atoms/anchor';
 import _ from 'lang';
+import PageTitle from 'atoms/pageTitle';
 import PageSubtitle from 'atoms/pageSubtitle';
 import PreviewCard from 'molecules/previewCard';
 const _l = _('en');
@@ -49,34 +50,36 @@ const SearchResults = ({
       </>
     );
   } else {
-    return searchQuery.trim().length <= 1 ? (
-      <PageBackdrop
-        graphicName='search-empty'
-        mainText={ _l('Start typing a keyphrase to see matching snippets.') }
-        mainTextClassName='search-page-text'
-      />
-    ) : searchResults.length === 0 ? (
-      <PageBackdrop
-        graphicName='search-no-results'
-        mainText={ (
-          <>
-            { _l('We couldn\'t find any results for the keyphrase ') }<strong>{ searchQuery }</strong>
-            { _l('.') }
-          </>
-        ) }
-        mainTextClassName='search-page-text'
-      />
-    ) : (
+    return (
       <>
-        <PageSubtitle isLight className='search-results-title'>
-          { _l('Search results') }
-        </PageSubtitle>
-        { searchResults.map(snippet => (
-          <PreviewCard
-            key={ `snippet_${snippet.url}` }
-            snippet={ snippet }
+        <PageTitle isLight className='search-results-title'>
+          { _l(searchQuery.trim().length <= 1 || searchResults.length === 0 ? 'Search' : 'Search results') }
+        </PageTitle>
+        { searchQuery.trim().length <= 1 ? (
+          <PageBackdrop
+            graphicName='search-empty'
+            mainText={ _l('Start typing a keyphrase to see matching snippets.') }
+            mainTextClassName='search-page-text'
           />
-        )) }
+        ) : searchResults.length === 0 ? (
+          <PageBackdrop
+            graphicName='search-no-results'
+            mainText={ (
+              <>
+                { _l('We couldn\'t find any results for the keyphrase ') }<strong>{ searchQuery }</strong>
+                { _l('.') }
+              </>
+            ) }
+            mainTextClassName='search-page-text'
+          />
+        ) :
+          searchResults.map(snippet => (
+            <PreviewCard
+              key={ `snippet_${snippet.url}` }
+              snippet={ snippet }
+            />
+          ))
+        }
       </>
     );
   }

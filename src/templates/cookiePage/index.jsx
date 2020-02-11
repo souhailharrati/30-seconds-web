@@ -33,8 +33,6 @@ const CookiePage = ({
         logoSrc={ logoSrc }
         isSearch={ false }
         isListing={ false }
-        withIcon
-        withTitle
       >
         <PageTitle>
           { _l('Cookie policy') }

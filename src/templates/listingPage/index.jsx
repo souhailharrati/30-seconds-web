@@ -50,8 +50,6 @@ const ListingPage = ({
         logoSrc={ logoSrc }
         isSearch={ false }
         isListing
-        withIcon={ true }
-        withTitle={ true }
       >
         <SnippetList
           listingName={ listingName }

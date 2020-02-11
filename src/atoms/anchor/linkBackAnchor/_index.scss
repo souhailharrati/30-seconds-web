@@ -2,7 +2,7 @@
 a.link-back {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 4.25rem;
   transition: 0.3s ease all;
   font-size: 1.125rem;
   line-height: 48px;
@@ -14,7 +14,7 @@ a.link-back {
   z-index: 1010;
   background: var(--nav-bar-back-color);
   border-bottom: 1px solid var(--nav-bar-border-color); 
-  width: 100vw;
+  width: calc(100vw - 4.25rem);
 
   &, &:link, &:visited {
     color: var(--fore-color-dark);

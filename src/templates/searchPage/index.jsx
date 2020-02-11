@@ -41,8 +41,6 @@ const SearchPage = ({
         logoSrc={ logoSrc }
         isSearch
         isListing={ false }
-        withIcon={ false }
-        withTitle={ true }
       >
         <Search shouldUpdateHistory className='main-search'/>
         <SearchResults />

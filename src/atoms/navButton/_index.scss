@@ -64,8 +64,11 @@ $nav-button-active-fore-color-dark: #CDD4EF;
 
   @media screen and (min-width: $layout-large-nav-breakpoint) {
     width: 2.5rem;
-    left: 1rem;
+    left: 3.5rem;
 
+    &:first-of-type {
+      left: 3.75rem;
+    }
     &:last-of-type {
       position: absolute;
       left: auto;
@@ -74,6 +77,10 @@ $nav-button-active-fore-color-dark: #CDD4EF;
   }
 
   @media screen and (min-width: 1024px) {
+    width: 3rem;
+  }
+
+  @media screen and (min-width: 1200px) {
     width: 4rem;
   }
 }
