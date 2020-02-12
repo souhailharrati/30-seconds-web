@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { trimWhiteSpace, getURLParameters, throttle, getBaseURL } from 'functions/utils';
+import { trimWhiteSpace, getURLParameters, throttle, getBaseURL, getRootURL } from 'functions/utils';
 import { pushNewQuery, searchByKeyphrase } from 'state/search';
 import _ from 'lang';
 import { useFetchSearchIndex } from 'functions/hooks';
@@ -39,10 +39,11 @@ const Search = ({
   searchIndex,
   searchQuery,
   shouldUpdateHistory = false,
+  shouldHaveInitialValue = false,
   searchTimestamp,
   dispatch,
 }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState( '');
 
   useFetchSearchIndex(dispatch);
 
@@ -59,6 +60,7 @@ const Search = ({
   }, []);
 
   React.useEffect(throttle(() => {
+    if(!shouldHaveInitialValue && value === '') return;
     dispatch(pushNewQuery(value));
     dispatch(searchByKeyphrase(value, searchIndex));
     if(shouldUpdateHistory)
@@ -83,8 +85,14 @@ const Search = ({
           document.activeElement &&
           document.activeElement.blur &&
           typeof document.activeElement.blur === 'function'
-        )
+        ) {
           document.activeElement.blur();
+          if (!shouldUpdateHistory) {
+            const encodedValue = encodeURIComponent(value);
+            const rootURL = getRootURL(window.location.href);
+            window.location.href = `${ rootURL }/search/${ value ? `?keyphrase=${encodedValue}` : '' }`;
+          }
+        }
       } }
     />
   );

@@ -28,9 +28,7 @@ const NavButton = ({
     className={ trimWhiteSpace`nav-btn icon ${`icon-${icon}`} ${className}` }
     link={ link }
     { ...rest }
-  >
-    { _l(`nav.${icon}`) }
-  </Anchor>
+  />
 );
 
 NavButton.propTypes = {

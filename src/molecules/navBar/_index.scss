@@ -14,22 +14,24 @@
   background: var(--nav-bar-back-color);
   line-height: 0;
   box-sizing: border-box;
-  position: fixed;
+  // position: fixed;
   z-index: 1001;
-  @media screen {
-    border-top: 1px solid var(--nav-bar-border-color);
-    height: 56px;
-    bottom: 0;
-    width: 100vw;
+  border-bottom: 1px solid var(--nav-bar-border-color);
+  height: 100%;
+  width: 100vw;
+
+
+  @media screen and (min-width: $layout-large-breakpoint) {
+    > :first-child {
+      margin-left: calc((100% - 768px) / 2 - 48px);
+    }
   }
-  @media screen and (min-width: $layout-medium-breakpoint) and (orientation: landscape) {
-    border-top: none;
-    border-right: 1px solid var(--nav-bar-border-color);
-    height: 100vh;
-    left: 0;
-    width: 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+}
+
+// Website logo
+img.website-logo {
+  transition: 0.3s ease all;
+  padding: 6px;
+  width: 36px;
+  height: 36px;
 }

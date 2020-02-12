@@ -5,6 +5,7 @@ import NavBar from 'molecules/navBar';
 import Footer from 'molecules/footer';
 import CookieConsentPopup from 'molecules/cookieConsentPopup';
 import { useMedia } from 'functions/hooks';
+import { trimWhiteSpace } from 'functions/utils';
 import _ from 'lang';
 import { toggleDarkMode, decideCookies } from 'state/shell';
 const _l = _('en');
@@ -18,10 +19,13 @@ const Shell = ({
   acceptsCookies,
   isSearch,
   isListing,
+  isSnippet,
   dispatch,
   withIcon = true,
   withTitle = true,
   logoSrc,
+  lastPageTitle,
+  lastPageUrl,
   externalUrl = config.repositoryUrl,
   children,
 }) => {
@@ -37,9 +41,9 @@ const Shell = ({
   }, []);
 
   return (
-    <div className={
-      isDarkMode === true || (darkModeEnabledInitially && isDarkMode === undefined) ? 'page-container dark' : 'page-container'
-    }>
+    <div
+      className={ trimWhiteSpace`page-container ${isDarkMode ? 'dark' : ''}` }
+    >
       {
         typeof acceptsCookies === 'undefined' && env === 'PRODUCTION' ?
           <CookieConsentPopup
@@ -54,69 +58,33 @@ const Shell = ({
           />
           : null
       }
-      <NavBar buttons={ [
-        {
-          icon: 'list',
-          className: isListing ? 'active' : '',
-          link: {
-            internal: true,
-            url: '/list/p/1',
-            title: 'Snippet list',
+      <NavBar
+        isSearch={ isSearch }
+        isSnippet={ isSnippet }
+        isListing={ isListing }
+        buttons={ [
+          {
+            icon: isDarkMode ? 'sun' : 'moon',
+            link: {
+              internal: false,
+              url: '#',
+              rel: 'nofollow',
+              title: isDarkMode ? _l('Switch to light mode') : _l('Switch to dark mode'),
+            },
+            onClick: e => {
+              e.preventDefault();
+              dispatch(toggleDarkMode(!isDarkMode));
+            },
           },
-        },
-        {
-          icon: 'search',
-          className: isSearch ? 'active' : '',
-          link: {
-            internal: true,
-            url: '/search',
-            title: 'Search',
-          },
-        },
-        {
-          icon: 'github',
-          link: {
-            internal: false,
-            url: externalUrl,
-            title: 'GitHub',
-            rel: 'noopener',
-            target: '_blank',
-          },
-        },
-        {
-          icon: isDarkMode ? 'sun' : 'moon',
-          link: {
-            internal: false,
-            url: '#',
-            rel: 'nofollow',
-            title: isDarkMode ? _l('Switch to light mode') : _l('Switch to dark mode'),
-          },
-          onClick: e => {
-            e.preventDefault();
-            dispatch(toggleDarkMode(!isDarkMode));
-          },
-        },
-      ] }/>
+        ] }
+        logoLink={ {
+          internal: true,
+          url: '/',
+        } }
+        logoSrc={ logoSrc }
+      >
+      </NavBar>
       <div className='content'>
-        { withTitle ? (
-          <h1 className='website-title'>
-            <Anchor
-              link={ {
-                internal: true,
-                url: '/',
-              } }
-            >
-              { _l('site.title') }
-              { withIcon ? (
-                <img
-                  src={ logoSrc }
-                  alt={ _l('Logo') }
-                  className='website-logo'
-                />
-              ) : ( '' ) }
-            </Anchor>
-          </h1>
-        ) : ( '' ) }
         { children }
         <Footer />
       </div>
@@ -148,11 +116,17 @@ Shell.propTypes = {
   logoSrc: PropTypes.string,
   /** URL of the external resource to link to */
   externalUrl: PropTypes.string,
+  /** Title of the last page */
+  lastPageTitle: PropTypes.string,
+  /** URL of the last page */
+  lastPageUrl: PropTypes.string,
 };
 
 export default connect(
   state => ({
     isDarkMode: state.shell.isDarkMode,
+    lastPageTitle: state.navigation.lastPageTitle,
+    lastPageUrl: state.navigation.lastPageUrl,
     acceptsCookies: state.shell.acceptsCookies,
   }),
   null

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as LinkPropType } from 'typedefs';
-import NavButton from 'atoms/navButton';
+import { Anchor } from 'atoms/anchor';
+import Search from 'atoms/search';
+import _ from 'lang';
+const _l = _('en');
 
 /**
  * Renders a group of navigational elements.
@@ -10,12 +13,34 @@ import NavButton from 'atoms/navButton';
  */
 const NavBar = ({
   buttons,
+  isSearch = false,
+  logoLink,
+  logoSrc,
   ...rest
 }) => (
-  <header className="nav-bar" { ...rest }>
-    { buttons.map(({icon, link, ...btn}, i) => (
-      <NavButton icon={ icon } link={ link } key={ `nav-btn-${i}` } { ...btn } />
-    )) }
+  <header className='nav-bar' { ...rest }>
+    <Anchor
+      className='nav-btn'
+      link={ logoLink }
+    >
+      <img
+        src={ logoSrc }
+        alt={ _l('Logo') }
+        className='website-logo'
+      />
+    </Anchor>
+    <Search
+      shouldUpdateHistory={ isSearch }
+      shouldHaveInitialValue={ isSearch }
+    />
+    <Anchor
+      className='nav-btn icon icon-settings'
+      link={ {
+        internal: false,
+        url: '#',
+        rel: 'nofollow',
+      } }
+    />
   </header>
 );
 
